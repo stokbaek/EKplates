@@ -1257,8 +1257,8 @@ local function defaultcvar()
 		SetCVar("nameplateOtherBottomInset", -1)
 		SetCVar("nameplateMaxDistance", 45)
 	else
-		SetCVar("nameplateOtherTopInset", 1)
-		SetCVar("nameplateOtherBottomInset", 1)
+		SetCVar("nameplateOtherTopInset", 0.08)
+		SetCVar("nameplateOtherBottomInset", 0.1)
 		SetCVar("nameplateMaxDistance", 60)
 	end
 	--fix fps drop(距離縮放與描邊功能會引起掉幀)
