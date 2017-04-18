@@ -1,6 +1,6 @@
 local T, C, L, G = unpack(select(2, ...))
 
---[[ config從beta7版本起獨立，至config.lua編輯設定 ]]--
+--[[ Settings can be set in config.lua ]]--
 
 --[[ Functions ]]--
 colorspower = {}
@@ -198,6 +198,8 @@ local function UpdateAuraIcon(button, unit, index, filter)
 end
 
 local function AuraFilter(caster, spellid)
+    if C.CC == True and C.CCList[spellid] then
+        return true
 	if caster == "player" then
 		if C["myfiltertype"] == "none" then
 			return false
@@ -539,9 +541,9 @@ if C.classresource_show then
 					self:ClearAllPoints()
 					self:Show()
 					if C.numberstyle then
-						self:SetPoint("TOP", namePlatePlayer.UnitFrame.name, "TOP", 0, 0) -- 玩家數字
+						self:SetPoint("TOP", namePlatePlayer.UnitFrame.name, "TOP", 0, 0)
 					else
-						self:SetPoint("BOTTOM", namePlatePlayer.UnitFrame.healthBar, "TOP", 0, 3) -- 玩家條
+						self:SetPoint("BOTTOM", namePlatePlayer.UnitFrame.healthBar, "TOP", 0, 3)
 					end
 				end
 			elseif event == "NAME_PLATE_UNIT_REMOVED" and UnitIsUnit(unit, "player") then
@@ -553,9 +555,9 @@ if C.classresource_show then
 				self:SetParent(namePlateTarget)
 				self:ClearAllPoints()
 				if C.numberstyle then
-					self:SetPoint("TOP", namePlateTarget.UnitFrame.name, "BOTTOM", 0, -2) -- 目標數字
+					self:SetPoint("TOP", namePlateTarget.UnitFrame.name, "BOTTOM", 0, -2)
 				else
-					self:SetPoint("TOP", namePlateTarget.UnitFrame.healthBar, "BOTTOM", 0, -2) -- 目標條
+					self:SetPoint("TOP", namePlateTarget.UnitFrame.healthBar, "BOTTOM", 0, -2)
 				end
 				self:Show()
 			else
@@ -665,14 +667,14 @@ end
 
 local function IsOnThreatList(unit)
 	local _, threatStatus = UnitDetailedThreatSituation("player", unit)
-	if threatStatus == 3 then  --穩定仇恨，當前坦克/securely tanking, highest threat
-		return .9, .1, .4  --紅色/red
-	elseif threatStatus == 2 then  --非當前仇恨，當前坦克(已OT或坦克正在丟失仇恨)/insecurely tanking, another unit have higher threat but not tanking.
-		return .9, .1, .9  --粉色/pink
-	elseif threatStatus == 1 then  --當前仇恨，非當前坦克(非坦克高仇恨或坦克正在獲得仇恨)/not tanking, higher threat than tank.
-		return .4, .1, .9  --紫色/purple
-	elseif threatStatus == 0 then  --低仇恨，安全/not tanking, lower threat than tank.
-		return .1, .7, .9  --藍色/blue
+	if threatStatus == 3 then  -- Securely tanking, highest threat
+		return .9, .1, .4  -- Red
+	elseif threatStatus == 2 then  -- Insecurely tanking, another unit have higher threat but not tanking.
+		return .9, .1, .9  -- Pink
+	elseif threatStatus == 1 then  -- Not tanking, higher threat than tank.
+		return .4, .1, .9  -- Purple
+	elseif threatStatus == 0 then  -- Not tanking, lower threat than tank.
+		return .1, .7, .9  -- Blue
 	end
 end
 
@@ -770,15 +772,15 @@ local function UpdateSelectionHighlight(unitFrame)
 				unitFrame.redarrow:SetPoint("BOTTOM", unitFrame.name, "TOP", 0, 0)
 			end
 		else
-			if unitFrame.iconnumber and unitFrame.iconnumber > 0 then -- 有圖示
+			if unitFrame.iconnumber and unitFrame.iconnumber > 0 then
 				unitFrame.redarrow:SetPoint("BOTTOM", unitFrame.icons, "TOP", 0, 3)
-			elseif UnitHealth(unit) and UnitHealthMax(unit) and UnitHealth(unit) ~= UnitHealthMax(unit) then -- 非滿血
+			elseif UnitHealth(unit) and UnitHealthMax(unit) and UnitHealth(unit) ~= UnitHealthMax(unit) then
 				unitFrame.redarrow:SetPoint("BOTTOM", unitFrame.healthperc, "TOP", 0, 0)
-			else -- 只有名字
+			else
 				unitFrame.redarrow:SetPoint("BOTTOM", unitFrame.name, "TOP", 0, 0)
 			end
 		end
-	else	--橫向箭頭，在boss mod友方目標隱藏名字的時候會有點蠢
+	else
 		if not C.numberstyle then
 			unitFrame.redarrow:SetPoint("LEFT", unitFrame.healthBar, "RIGHT", 0, 0)
 		else
@@ -962,7 +964,6 @@ local function HideBlizzard()
 		NamePlates_UpdateNamePlateOptions()
 	end
 
-	--去你的DBM
 	--if DBM and DBM.Nameplate then
 		--function DBM.Nameplate:SupportedNPMod()
 			--return true
@@ -1006,7 +1007,7 @@ local function OnNamePlateCreated(namePlate)
 	namePlate.UnitFrame:SetAllPoints(namePlate)
 	namePlate.UnitFrame:SetFrameLevel(namePlate:GetFrameLevel())
 
-	if C.numberstyle then -- 數字樣式
+	if C.numberstyle then
 		namePlate.UnitFrame.healthperc = namePlate.UnitFrame:CreateFontString(nil, "OVERLAY")
 		namePlate.UnitFrame.healthperc:SetFont(G.numberstylefont, G.fontsize*1.75, G.fontflag)
 		namePlate.UnitFrame.healthperc:SetPoint("CENTER")
@@ -1121,7 +1122,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.power:SetShadowColor(0, 0, 0, 0.4)
 		namePlate.UnitFrame.power:SetShadowOffset(1, -1)
 		namePlate.UnitFrame.power:SetText("55")
-	else -- 條形樣式
+	else
 		namePlate.UnitFrame.healthBar = CreateFrame("StatusBar", nil, namePlate.UnitFrame)
 		namePlate.UnitFrame.healthBar:SetHeight(8)
 		namePlate.UnitFrame.healthBar:SetPoint("LEFT", 0, 0)
@@ -1250,7 +1251,7 @@ local function OnNamePlateRemoved(unit)
 	CastingBarFrame_SetUnit(namePlate.UnitFrame.castBar, nil, false, true)
 end
 
---加一段cvar代碼
+--[[ Cvar settings ]]--
 local function defaultcvar()
 	if C.CVAR then
 		SetCVar("nameplateOtherTopInset", -1)
@@ -1261,39 +1262,49 @@ local function defaultcvar()
 		SetCVar("nameplateOtherBottomInset", 0.1)
 		SetCVar("nameplateMaxDistance", 60)
 	end
-	--fix fps drop(距離縮放與描邊功能會引起掉幀)
+
+	-- fix fps drop
 	SetCVar("namePlateMinScale", 0.8)
 	SetCVar("namePlateMaxScale", 1)
-	--讓堆疊血條的間距小一點
+
+	-- Dont let plates overlap each other
 	SetCVar("nameplateOverlapH",  1)
 	SetCVar("nameplateOverlapV",  1)
-	--boss nameplate scale
+
+	-- Boss nameplate scale
 	SetCVar("nameplateLargerScale", 1.2)
-	--非當前目標透明度
+
+	-- Non-current target transparency
 	SetCVar("nameplateMinAlpha", C.MinAlpha)
-	--禁用點擊
+
+	-- Clickthrough settings
 	C_NamePlate.SetNamePlateFriendlyClickThrough(C.FriendlyClickThrough)
 	C_NamePlate.SetNamePlateEnemyClickThrough(C.EnemyClickThrough)
-	--個人資源顯示條件
+
+	-- Personal bar
 	SetCVar("nameplatePersonalShowAlways", 0)
 	SetCVar("nameplatePersonalShowInCombat", 1)
 	SetCVar("nameplatePersonalShowWithTarget", 1)
 	SetCVar("nameplatePersonalHideDelaySeconds", 3)
-	--敵方顯示條件
-	--SetCVar("nameplateShowEnemyGuardians", 0) --守護者
-	SetCVar("nameplateShowEnemyMinions", 1)  --僕從
-	--SetCVar("nameplateShowEnemyPets", 0)  --寵物
-	SetCVar("nameplateShowEnemyTotems", 1) --圖騰
-	SetCVar("nameplateShowEnemyMinus", 1) --次要
-	--友方顯示條件
-	SetCVar("nameplateShowFriendlyGuardians", 0) --守護者
-	SetCVar("nameplateShowFriendlyMinions", 0)  --僕從
-	SetCVar("nameplateShowFriendlyNPCs", 0) --npc
-	SetCVar("nameplateShowFriendlyPets", 0) --寵物
-	SetCVar("nameplateShowFriendlyTotems", 0) --圖騰
-	--當前目標大小
+
+	-- Enemy plates
+	--SetCVar("nameplateShowEnemyGuardians", 0)
+	SetCVar("nameplateShowEnemyMinions", 1)
+	--SetCVar("nameplateShowEnemyPets", 0)
+	SetCVar("nameplateShowEnemyTotems", 1)
+	SetCVar("nameplateShowEnemyMinus", 1)
+
+	-- Friendly plates
+	SetCVar("nameplateShowFriendlyGuardians", 0)
+	SetCVar("nameplateShowFriendlyMinions", 0)
+	SetCVar("nameplateShowFriendlyNPCs", 0)
+	SetCVar("nameplateShowFriendlyPets", 0)
+	SetCVar("nameplateShowFriendlyTotems", 0)
+
+	-- Current target size
 	SetCVar("nameplateSelectedScale", C.SelectedScale)
-  --Smaller SCT text
+
+    -- Smaller SCT text
 	SetCVar("WorldTextScale", 0.7)
 end
 
