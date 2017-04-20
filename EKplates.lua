@@ -200,6 +200,7 @@ end
 local function AuraFilter(caster, spellid)
     if C.CC == True and C.CCList[spellid] then
         return true
+    end
 	if caster == "player" then
 		if C["myfiltertype"] == "none" then
 			return false
