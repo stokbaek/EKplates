@@ -1,17 +1,7 @@
-# EKplates
+# EKplates #
 
-## 簡單寫一下FAQ：
+**This is a fork of EKE00372 addon (https://github.com/EKE00372/EKplates)**
 
-1.設置命令是什麼？
-
-這個插件沒有設置命令，沒有遊戲內選項，沒有遊戲內的圖形化介面(GUI)控制台，將來也不會有。所有的改動都要編輯Config.lua，如果你要求高度自定義，那就自己改ekplates.lua吧。
-
-2.真的不考慮做一個GUI？
-
-反正我說我不想加也有人機機歪歪，那......幹你老師恁爸不會啦。作者寫給自己用的東西幹麻貼合別人的習慣？
-
-## 關於EKplates
-
-Dawn是個神人，也曾經很高產，但軍團入侵時我真的以為他不更新了，於是有了這個。現在Infinity Plates仍在，而且代碼一如既往地精簡強大。
-
-數字模式姓名版用了超過五年，以後大概也會一直用下去；你若需要一個普通的條條兒何必用這個，外面好用的血「條」插件一抓一大把，本插件不提供售後，條形模式的bug修復也永遠不是最優先。
+## Changes made in this fork follows: ##
+* Option to show castbar instead of cast icon when using numberstyle.
+* CC debuffs are in their own section and can be turned on/off, This makes it possible to use whitelist for your owndebuffs while still showing CC from other players.
