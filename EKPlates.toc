@@ -1,9 +1,9 @@
 ﻿## Interface: 70200
 ## Title: |cff00ffffEK|rPlates
-## Version: R1.3
+## Version: R1.3a
 ## Author: EK(Linodas@Illidan-US)
 ## Credits-to:Paopao, Dawn
 ## Notes: Nameplates
 
-config.lua
-EKplates.lua
+Config.lua
+EKPlates.lua

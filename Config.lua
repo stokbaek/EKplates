@@ -1,4 +1,4 @@
-local addon, ns = ...
+﻿local addon, ns = ...
 ns[1] = {} -- T, functions, constants, variables
 ns[2] = {} -- C, config
 ns[3] = {} -- L, localization
@@ -32,27 +32,24 @@ G.fontflag = "OUTLINE"  -- "OUTLINE" or none
 
 --[[ Config ]]--
 
-C.castbar = "bar" -- Nameplate shows casts as icon or bar
-C.CVAR = false  -- Cvar setting to turn nameplate work like WOD
+C.CVAR = false  -- Let Nameplates go off screen
+C.MaxDistance = 45  -- Max distance for nameplate show on
 C.MinAlpha = 0.8 -- Set fadeout for out range and non-target
 C.SelectedScale = 1 -- Scale select target nameplate
 C.FriendlyClickThrough = true -- Friendly nameplate click through
 C.EnemyClickThrough = false  -- Enemy nameplate click through
-
 C.name_mod = true -- Show only name on friendy player nameplates
 C.friendlyCR = true -- Friendly class color
-
 C.enemyCR = true -- Enemy class color
 C.threatcolor = true -- Change name color by threat
-
 C.cbshield = false  -- Show castbar un-interrupt shield icon
 C.level = false -- Show level
-
 C.HorizontalArrow = false -- Horizontal red arrow at right
 C.HideArrow = false  -- Hide arrow
 
 --number style additional config
 C.cbtext = true -- Show castbar text
+C.castbar = false  -- Show castbar as a "bar"
 
 --[[ the Player Plate ]]--
 
@@ -74,8 +71,9 @@ C.CC = True -- Show CC debuffs on targets.
 -- "none": do not show anything
 
 C.WhiteList = {
+	--[166646] = true, -- 御風而行(test)
 	--BUFF
-	[209859] = true, -- Bolster(mythic+)
+	[209859] = true, -- Bolstering(mythic+)
 	[226510] = true, -- Sanguine Ichor(mythic+)
 
 	-- DEBUFF
