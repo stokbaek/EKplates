@@ -78,6 +78,12 @@ C.WhiteList = {
 	-- Death Knight:
 
 	-- Demon Hunter:
+	[206473] = true, -- Bloodlet
+	[206491] = true, -- Nemesis
+	[204021] = true, -- Fiery Brand
+	[204598] = true, -- Sigil of Flame
+	[202137] = true, -- Sigil of Silence
+	[207684] = true, -- Sigil of Misery
 
 	-- Druid:
 
