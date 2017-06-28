@@ -117,7 +117,7 @@ local createBackdrop = function(parent, anchor, a)
     return frame
 end
 
---[[ Auras ]]--
+--[[ Auras ]]-- 
 
 local day, hour, minute = 86400, 3600, 60
 local function FormatTime(s)
@@ -286,7 +286,7 @@ if C.playerplate then
 
 	PowerFrame:SetScript("OnEvent", function(self, event, unit)
 		if event == "PLAYER_ENTERING_WORLD" or (event == "UNIT_POWER_FREQUENT" and unit == "player") then
-			local minPower, maxPower, _, powertype = UnitPower("player"), UnitPowerMax("player"), UnitPowerType("player")
+			local minPower, maxPower, powertype_index, powertype = UnitPower("player"), UnitPowerMax("player"), UnitPowerType("player")
 			local perc
 
 			if maxPower ~= 0 then
@@ -299,8 +299,8 @@ if C.playerplate then
 			if not C.numberstyle then
 				PowerFrame.powerBar:SetValue(perc)
 			else
-				if minPower ~= maxPower then
-					if powertype == 0 then
+				if minPower ~= maxPower then  
+					if powertype_index == 0 then
 						PowerFrame.powerperc:SetText(perc_text)
 					else
 						PowerFrame.powerperc:SetText(minPower)
@@ -1074,7 +1074,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.castBar.BorderShield:SetAtlas("nameplates-InterruptShield")
 		namePlate.UnitFrame.castBar.BorderShield:SetSize(15, 15)
 		namePlate.UnitFrame.castBar.BorderShield:SetPoint("CENTER", namePlate.UnitFrame.castBar, "BOTTOMLEFT")  
-		namePlate.UnitFrame.castBar.BorderShield:SetDrawLayer("OVERLAY",2)  
+		namePlate.UnitFrame.castBar.BorderShield:SetDrawLayer("OVERLAY",2)
 
 
 		namePlate.UnitFrame.castBar.Spark = namePlate.UnitFrame.castBar:CreateTexture(nil, "OVERLAY")
