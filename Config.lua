@@ -102,7 +102,15 @@ C.WhiteList = {
         [192759] = true, -- Kingsbane
         [79140] = true, -- Vendetta
 
-	-- Warlock:	
+        -- Warlock:
+        [146739] = true, -- Corruption
+        [980] = true, -- Agony
+        [63106] = true, -- Siphon Life
+        [27243] = true, -- Seed of Corruption
+        [348] = true, -- Immolate
+	[80240] = true, -- Havoc
+	[196414] = true, -- Eradication
+	[603] = true, -- Doom
 
 	-- Warrior:
 }
