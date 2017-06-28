@@ -76,6 +76,14 @@ C.WhiteList = {
 	[226510] = true, -- Sanguine Ichor(mythic+)
 
 	-- Death Knight:
+	[55078] = true, -- Blood Plague
+	[43265] = true, -- Death and Decay
+	[206930] = true, -- Heart Strike
+	[55095] = true, -- Frost Fever
+	[196771] = true, -- Remorseless Winter
+	[191587] = true, -- Virulent Plague
+	[77575] = true, -- Outbreak
+	[195757] = true, --  Festering Wound
 
 	-- Demon Hunter:
 	[206473] = true, -- Bloodlet
@@ -135,6 +143,7 @@ C.CCList = {
 	[9484]   = true, -- Shackle Undead
 	[20066]  = true, -- Repentance
 	[115078] = true, -- Paralysis
+	[207167] = true, -- Blinding Sheet
 
 	[339]    = true, -- Entangling Roots
 	[102359] = true, -- Mass Entanglement
