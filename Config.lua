@@ -71,16 +71,35 @@ C.CC = True -- Show CC debuffs on targets.
 -- "none": do not show anything
 
 C.WhiteList = {
-	--[166646] = true, -- 御風而行(test)
 	--BUFF
 	[209859] = true, -- Bolstering(mythic+)
 	[226510] = true, -- Sanguine Ichor(mythic+)
 
-	-- DEBUFF
-	[146739] = true, -- Corruption
-	[980] = true, -- Agony
-	[63106] = true, -- Siphon Life
-	[27243] = true, -- Seed of Corruption
+	-- Death Knight:
+
+	-- Demon Hunter:
+
+	-- Druid:
+
+	-- Hunter:
+
+	-- Mage:
+
+	-- Monk:
+
+	-- Paladin:
+	[20271] = true, -- Judgment
+	[183778] = true, -- Judgment of Light
+	[205273] = true, -- Wake of Ashes
+	[213757] = true, -- Execution Sentence
+
+	-- Priest:
+
+	-- Rogue:
+
+	-- Warlock:	
+
+	-- Warrior:
 }
 
 C.CCList = {
@@ -106,6 +125,11 @@ C.CCList = {
 	[5211]   = true, -- Mighty Bash
 	[853]    = true, -- Hammer of Justice
 	[221562] = true, -- Asphyxiate
+	[205290] = true, -- Wake of Ashes (Stun)
+        [29511] = true, -- Repentance
+        [115750] = true, -- Blinding Light
+        [183218] = true, -- Hand of Hindrance
+        [246806] = true, -- Lawbringer
 
 	[118905] = true, -- Static Charge
 	[132168] = true, -- Shockwave
