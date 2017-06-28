@@ -49,7 +49,7 @@ C.HideArrow = false  -- Hide arrow
 
 --number style additional config
 C.cbtext = true -- Show castbar text
-C.castbar = false  -- Show castbar as a "bar"
+C.castbar = true  -- Show castbar as a "bar"
 
 --[[ the Player Plate ]]--
 
@@ -109,22 +109,23 @@ C.WhiteList = {
 
 	-- Priest:
 
-        -- Rogue:
-        [37066] = true, -- Garrote
-        [1329] = true, -- Mutilate
-        [192424] = true, -- Surge of Toxins
-        [192759] = true, -- Kingsbane
-        [79140] = true, -- Vendetta
+	-- Rogue:
+	[37066] = true, -- Garrote
+	[1329] = true, -- Mutilate
+	[192424] = true, -- Surge of Toxins
+	[192759] = true, -- Kingsbane
+	[79140] = true, -- Vendetta
 
-        -- Warlock:
-        [146739] = true, -- Corruption
-        [980] = true, -- Agony
-        [63106] = true, -- Siphon Life
-        [27243] = true, -- Seed of Corruption
-        [348] = true, -- Immolate
+	-- Warlock:
+	[146739] = true, -- Corruption
+  [980] = true, -- Agony
+  [63106] = true, -- Siphon Life
+  [27243] = true, -- Seed of Corruption
+  [157736] = true, -- Immolate
 	[80240] = true, -- Havoc
 	[196414] = true, -- Eradication
 	[603] = true, -- Doom
+	[205179] = true, -- Phantom Singularity
 
 	-- Warrior:
 }
@@ -154,10 +155,10 @@ C.CCList = {
 	[853]    = true, -- Hammer of Justice
 	[221562] = true, -- Asphyxiate
 	[205290] = true, -- Wake of Ashes (Stun)
-        [29511] = true, -- Repentance
-        [115750] = true, -- Blinding Light
-        [183218] = true, -- Hand of Hindrance
-        [246806] = true, -- Lawbringer
+  [29511] = true, -- Repentance
+	[115750] = true, -- Blinding Light
+  [183218] = true, -- Hand of Hindrance
+  [246806] = true, -- Lawbringer
 
 	[118905] = true, -- Static Charge
 	[132168] = true, -- Shockwave
