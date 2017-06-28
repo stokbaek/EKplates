@@ -95,7 +95,12 @@ C.WhiteList = {
 
 	-- Priest:
 
-	-- Rogue:
+        -- Rogue:
+        [37066] = true, -- Garrote
+        [1329] = true, -- Mutilate
+        [192424] = true, -- Surge of Toxins
+        [192759] = true, -- Kingsbane
+        [79140] = true, -- Vendetta
 
 	-- Warlock:	
 
