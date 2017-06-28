@@ -117,7 +117,7 @@ local createBackdrop = function(parent, anchor, a)
     return frame
 end
 
---[[ Auras ]]-- 
+--[[ Auras ]]--
 
 local day, hour, minute = 86400, 3600, 60
 local function FormatTime(s)
@@ -299,7 +299,7 @@ if C.playerplate then
 			if not C.numberstyle then
 				PowerFrame.powerBar:SetValue(perc)
 			else
-				if minPower ~= maxPower then  
+				if minPower ~= maxPower then
 					if powertype_index == 0 then
 						PowerFrame.powerperc:SetText(perc_text)
 					else
