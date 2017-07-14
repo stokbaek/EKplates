@@ -172,7 +172,9 @@ local function UpdateAuraIcon(button, unit, index, filter)
 
 	local color = DebuffTypeColor[debuffType] or DebuffTypeColor.none
 	button.overlay:SetVertexColor(color.r, color.g, color.b)
-
+	if not UnitDebuff(unit, index, "PLAYER") then
+		button.icon:SetDesaturated(true)
+	end
 	if count and count > 1 then
 		button.count:SetText(count)
 	else
@@ -198,10 +200,13 @@ local function UpdateAuraIcon(button, unit, index, filter)
 	button:Show()
 end
 
-local function AuraFilter(caster, spellid)
-		if C.BUFF == True and C.BUFFList[spellid] then
-				return true
-		end
+local function AuraFilter(caster, spellid, botton)
+	if C.OTHERSTAUNT == True and C.Taunts[spellid] then
+		return true
+	end
+	if C.BUFF == True and C.BUFFList[spellid] then
+		return true
+	end
     if C.CC == True and C.CCList[spellid] then
         return true
     end
@@ -1283,7 +1288,7 @@ local function defaultcvar()
 
 	SetCVar("nameplateOverlapH",  0.3) --default is 0.8
 	SetCVar("nameplateOverlapV",  0.7) --default is 1.1
-	--非當前目標透明度
+
 	SetCVar("nameplateMinAlpha", C.MinAlpha)
 
 	SetCVar("nameplateSelectedScale", C.SelectedScale)
