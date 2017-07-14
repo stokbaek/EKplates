@@ -364,10 +364,10 @@ if C.classresource_show then
 	}
 
 	local cpoints_colors = { -- combat points
-		{1, 0, 0},
+		{1, 0, 0},  
 		{1, 1, 0},
 	}
-
+	
 	if(G.myClass == 'MONK') then
 		ClassPowerID = Enum.PowerType.Chi
 		ClassPowerType = "CHI"
@@ -1061,7 +1061,6 @@ local function OnNamePlateCreated(namePlate)
 			namePlate.UnitFrame.castBar.Icon:SetSize(32, 32)
 		end
 		namePlate.UnitFrame.castBar.Icon:SetTexCoord(0.05, 0.95, 0.05, 0.95)
-		namePlate.UnitFrame.castBar.Icon:SetSize(32, 32)
 		namePlate.UnitFrame.castBar.iconborder = CreateBG(namePlate.UnitFrame.castBar.Icon)
 		namePlate.UnitFrame.castBar.iconborder:SetDrawLayer("OVERLAY",-1)
 
@@ -1144,8 +1143,8 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.healthBar.value:SetText("Value")
 
 		namePlate.UnitFrame.name = createtext(namePlate.UnitFrame, "OVERLAY", G.fontsize-4, G.fontflag, "CENTER")
-		namePlate.UnitFrame.name:SetPoint("TOPLEFT", namePlate.UnitFrame, "TOPLEFT", 5, -5)
-		namePlate.UnitFrame.name:SetPoint("BOTTOMRIGHT", namePlate.UnitFrame, "TOPRIGHT", -5, -15)
+		namePlate.UnitFrame.name:SetPoint("TOPLEFT", namePlate.UnitFrame, "TOPLEFT", 5, 2)
+		namePlate.UnitFrame.name:SetPoint("BOTTOMRIGHT", namePlate.UnitFrame, "TOPRIGHT", -5, -8)
 		namePlate.UnitFrame.name:SetIndentedWordWrap(false)
 		namePlate.UnitFrame.name:SetTextColor(1,1,1)
 		namePlate.UnitFrame.name:SetText("Name")
@@ -1260,29 +1259,32 @@ end
 --[[ Cvar settings ]]--
 
 local function defaultcvar()
-	if C.CVAR then
+	if C.Inset then
 		SetCVar("nameplateOtherTopInset", -1)
 		SetCVar("nameplateOtherBottomInset", -1)
 	else
 		SetCVar("nameplateOtherTopInset", .08)
 		SetCVar("nameplateOtherBottomInset", .1)
 	end
-	SetCVar("nameplateMaxDistance", C.MaxDistance)
-	-- fix fps drop
-	SetCVar("namePlateMinScale", 0.8)
-	SetCVar("namePlateMaxScale", 1)
+	SetCVar("nameplateLargeTopInset", .08) 
+	SetCVar("nameplateLargeBottomInset", .1)
+	
+	SetCVar("nameplateMaxDistance", C.MaxDistance)	 --default is 60
+	--fix fps drop
+	SetCVar("namePlateMinScale", 1)  --default is 0.8
+	SetCVar("namePlateMaxScale", 1) 
+	--boss nameplate scale
+	SetCVar("nameplateLargerScale", 1) --default is 1.2
 
-	-- Dont let plates overlap each other
-	SetCVar("nameplateOverlapH",  1)
-	SetCVar("nameplateOverlapV",  1)
+	SetCVar("nameplateSelectedScale", C.SelectedScale)	
 
-	-- Boss nameplate scale
-	SetCVar("nameplateLargerScale", 1.2)
-
-	-- Non-current target transparency
+	SetCVar("nameplateOverlapH",  0.3) --default is 0.8
+	SetCVar("nameplateOverlapV",  0.7) --default is 1.1
+	--非當前目標透明度
 	SetCVar("nameplateMinAlpha", C.MinAlpha)
 
-	-- Clickthrough settings
+	SetCVar("nameplateSelectedScale", C.SelectedScale)
+
 	C_NamePlate.SetNamePlateFriendlyClickThrough(C.FriendlyClickThrough)
 	C_NamePlate.SetNamePlateEnemyClickThrough(C.EnemyClickThrough)
 
@@ -1293,7 +1295,7 @@ local function defaultcvar()
 	SetCVar("nameplatePersonalHideDelaySeconds", 3)
 
 	-- Enemy plates
-	SetCVar("nameplateShowEnemyGuardians", 0)
+	SetCVar("nameplateShowEnemyGuardians", 1)
 	SetCVar("nameplateShowEnemyMinions", 1)
 	SetCVar("nameplateShowEnemyPets", 0)
 	SetCVar("nameplateShowEnemyTotems", 1)
