@@ -32,7 +32,7 @@ G.fontflag = "OUTLINE"  -- "OUTLINE" or none
 
 --[[ Config ]]--
 
-C.CVAR = false  -- Let Nameplates go off screen
+C.Insert = false  -- Let Nameplates go off screen
 C.MaxDistance = 45  -- Max distance for nameplate show on
 C.MinAlpha = 0.8 -- Set fadeout for out range and non-target
 C.SelectedScale = 1 -- Scale select target nameplate
@@ -49,7 +49,7 @@ C.HideArrow = false  -- Hide arrow
 
 --number style additional config
 C.cbtext = true -- Show castbar text
-C.castbar = true  -- Show castbar as a "bar"
+C.castbar = false  -- Show castbar as a "bar"
 
 --[[ the Player Plate ]]--
 
@@ -57,6 +57,7 @@ C.playerplate = false  -- Player self nameplate
 C.classresource_show = false  -- Resource
 C.classresource = "player" -- "player", "target"
 C.plateaura = false  -- Aura
+C.PlayerClickThrough = false -- Player resource click through
 
 --[[ Aura Icons on Plates ]]--
 
@@ -64,17 +65,18 @@ C.auranum = 5
 C.auraiconsize = 22
 C.myfiltertype = "whitelist" -- Show aura cast by player
 C.otherfiltertype = "none"  -- Show aura cast by other
+C.BUFF = True -- Show important buffs on mobs.
 C.CC = True -- Show CC debuffs on targets.
 
 -- "whitelist": show only list
 -- "blacklist": show only unlisted
 -- "none": do not show anything
 
-C.WhiteList = {
-	--BUFF
-	[209859] = true, -- Bolstering(mythic+)
-	[226510] = true, -- Sanguine Ichor(mythic+)
+C.Taunts = {
 
+}
+
+C.WhiteList = {
 	-- Death Knight:
 	[55078] = true, -- Blood Plague
 	[43265] = true, -- Death and Decay
@@ -100,6 +102,14 @@ C.WhiteList = {
 	-- Mage:
 
 	-- Monk:
+	[196608] = true, -- Eye of Tiger
+	[115181] = true, -- Breath of Fire
+	[121253] = true, -- Keg Smash
+	[213062] = true, -- Dark Side of the Moon
+	[115080] = true, -- Touch of Death
+	[122470] = true, -- Touch of Karma
+	[116706] = true, -- Disable
+	[228287] = true, -- Mark of the Crane
 
 	-- Paladin:
 	[20271] = true, -- Judgment
@@ -119,15 +129,38 @@ C.WhiteList = {
 	-- Warlock:
 	[146739] = true, -- Corruption
   [980] = true, -- Agony
-  [63106] = true, -- Siphon Life
-  [27243] = true, -- Seed of Corruption
-  [157736] = true, -- Immolate
-	[80240] = true, -- Havoc
+	[63106] = true, -- Siphon Life
+	[27243] = true, -- Seed of Corruption
+	[233496] = true -- Unstable Affliction
+	[233490] = true -- Unstable Affliction
+	[233497] = true -- Unstable Affliction
+	[233498] = true -- Unstable Affliction
+	[233499] = true -- Unstable Affliction
+	[157736] = true, -- Immolate
+	[80240] = true, -- Havocable Affliction
+	[233490] = true
 	[196414] = true, -- Eradication
 	[603] = true, -- Doom
 	[205179] = true, -- Phantom Singularity
 
 	-- Warrior:
+	[27579] = true, -- Demoralizing Shout
+	[13532] = true, -- Thunder Clap
+	[238149] = true, -- Neltharion's Thunder
+	[772] = true, -- Rend
+	[215538] = true, -- Trauma
+	[167105] = true, -- Colossus Smash
+	[209541] = true, -- Touch of Zakajz
+	[238147] = true, -- Executioner's Precision
+	[1715] = true, -- Hamstring
+	[5246] = true, -- Intimidating Shout
+}
+
+C.BUFFList = {
+	--BUFF
+	[209859] = true, -- Bolstering(mythic+)
+	[226510] = true, -- Sanguine Ichor(mythic+)
+	[236513] = true, -- Bonecage Armor (ToS)
 }
 
 C.CCList = {
@@ -157,11 +190,12 @@ C.CCList = {
 	[205290] = true, -- Wake of Ashes (Stun)
   [29511] = true, -- Repentance
 	[115750] = true, -- Blinding Light
-  [183218] = true, -- Hand of Hindrance
-  [246806] = true, -- Lawbringer
+	[183218] = true, -- Hand of Hindrance
+	[246806] = true, -- Lawbringer
 
 	[118905] = true, -- Static Charge
 	[132168] = true, -- Shockwave
+	[93814] = true, -- Stormbolt
 	[179057] = true, -- Chaos Nova
 	[30283]  = true, -- Shadowfury
  	[207171] = true, -- Winter is Coming

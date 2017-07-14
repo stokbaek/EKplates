@@ -199,6 +199,9 @@ local function UpdateAuraIcon(button, unit, index, filter)
 end
 
 local function AuraFilter(caster, spellid)
+		if C.BUFF == True and C.BUFFList[spellid] then
+				return true
+		end
     if C.CC == True and C.CCList[spellid] then
         return true
     end
@@ -286,7 +289,7 @@ if C.playerplate then
 
 	PowerFrame:SetScript("OnEvent", function(self, event, unit)
 		if event == "PLAYER_ENTERING_WORLD" or (event == "UNIT_POWER_FREQUENT" and unit == "player") then
-			local minPower, maxPower, _, powertype = UnitPower("player"), UnitPowerMax("player"), UnitPowerType("player")
+			local minPower, maxPower, powertype_index, powertype = UnitPower("player"), UnitPowerMax("player"), UnitPowerType("player")
 			local perc
 
 			if maxPower ~= 0 then
@@ -300,7 +303,7 @@ if C.playerplate then
 				PowerFrame.powerBar:SetValue(perc)
 			else
 				if minPower ~= maxPower then
-					if powertype == 0 then
+					if powertype_index == 0 then
 						PowerFrame.powerperc:SetText(perc_text)
 					else
 						PowerFrame.powerperc:SetText(minPower)
@@ -485,7 +488,7 @@ if C.classresource_show then
 									self[i]:Hide()
 								end
 								self[i].tex:SetColorTexture(unpack(cpoints_colors[1]))
-							end  
+							end
 						else
 							for i = 1, 5 do
 								self[i]:Show()
@@ -692,7 +695,7 @@ end
 local function UpdateHealthColor(unitFrame)
 	local unit = unitFrame.displayedUnit
 	local r, g, b
-	
+
 	if ( not UnitIsConnected(unit) ) then
 		r, g, b = 0.7, 0.7, 0.7
 	else
@@ -1038,16 +1041,16 @@ local function OnNamePlateCreated(namePlate)
 		end
 		if C.classresource_show and C.classresource == "target" then
 			namePlate.UnitFrame.castBar:SetPoint("TOP", namePlate.UnitFrame.name, "BOTTOM", 0, -7)
-		else  
+		else
 			namePlate.UnitFrame.castBar:SetPoint("TOP", namePlate.UnitFrame.name, "BOTTOM", 0, -3)
-		end 
+		end
 
 		namePlate.UnitFrame.castBar:SetStatusBarTexture(G.iconcastbar)
 		namePlate.UnitFrame.castBar:SetStatusBarColor(0.5, 0.5, 0.5)
-		
+
 		namePlate.UnitFrame.castBar.border = CreateBDFrame(namePlate.UnitFrame.castBar, 0)
 		CreateThinSD(namePlate.UnitFrame.castBar.border, 1, 0, 0, 0, 1, -2)
-		
+
 		namePlate.UnitFrame.castBar.bg = namePlate.UnitFrame.castBar:CreateTexture(nil, 'BORDER')
 		namePlate.UnitFrame.castBar.bg:SetAllPoints(namePlate.UnitFrame.castBar)
 		namePlate.UnitFrame.castBar.bg:SetTexture(1/3, 1/3, 1/3, .5)
@@ -1061,7 +1064,6 @@ local function OnNamePlateCreated(namePlate)
 			namePlate.UnitFrame.castBar.Icon:SetSize(32, 32)
 		end
 		namePlate.UnitFrame.castBar.Icon:SetTexCoord(0.05, 0.95, 0.05, 0.95)
-		namePlate.UnitFrame.castBar.Icon:SetSize(32, 32)
 		namePlate.UnitFrame.castBar.iconborder = CreateBG(namePlate.UnitFrame.castBar.Icon)
 		namePlate.UnitFrame.castBar.iconborder:SetDrawLayer("OVERLAY",-1)
 
@@ -1073,8 +1075,8 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.castBar.BorderShield = namePlate.UnitFrame.castBar:CreateTexture(nil, "OVERLAY", 1)
 		namePlate.UnitFrame.castBar.BorderShield:SetAtlas("nameplates-InterruptShield")
 		namePlate.UnitFrame.castBar.BorderShield:SetSize(15, 15)
-		namePlate.UnitFrame.castBar.BorderShield:SetPoint("CENTER", namePlate.UnitFrame.castBar, "BOTTOMLEFT")  
-		namePlate.UnitFrame.castBar.BorderShield:SetDrawLayer("OVERLAY",2)  
+		namePlate.UnitFrame.castBar.BorderShield:SetPoint("CENTER", namePlate.UnitFrame.castBar, "BOTTOMLEFT")
+		namePlate.UnitFrame.castBar.BorderShield:SetDrawLayer("OVERLAY",2)
 
 
 		namePlate.UnitFrame.castBar.Spark = namePlate.UnitFrame.castBar:CreateTexture(nil, "OVERLAY")
@@ -1102,7 +1104,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:SetTexture(G.raidicon)
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:SetAllPoints()
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:Hide()
-		
+
 		namePlate.UnitFrame.redarrow = namePlate.UnitFrame:CreateTexture(nil, 'OVERLAY')
 		namePlate.UnitFrame.redarrow:SetSize(50, 50)
 		if C.HideArrow then
@@ -1114,7 +1116,7 @@ local function OnNamePlateCreated(namePlate)
 			namePlate.UnitFrame.redarrow:SetTexture(G.redarrow1)
 		end
 		namePlate.UnitFrame.redarrow:Hide()
-		
+
 		namePlate.UnitFrame.icons = CreateFrame("Frame", nil, namePlate.UnitFrame)
 		namePlate.UnitFrame.icons:SetPoint("BOTTOM", namePlate.UnitFrame.healthperc, "TOP", 0, 0)
 		namePlate.UnitFrame.icons:SetWidth(140)
@@ -1144,8 +1146,8 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.healthBar.value:SetText("Value")
 
 		namePlate.UnitFrame.name = createtext(namePlate.UnitFrame, "OVERLAY", G.fontsize-4, G.fontflag, "CENTER")
-		namePlate.UnitFrame.name:SetPoint("TOPLEFT", namePlate.UnitFrame, "TOPLEFT", 5, -5)
-		namePlate.UnitFrame.name:SetPoint("BOTTOMRIGHT", namePlate.UnitFrame, "TOPRIGHT", -5, -15)
+		namePlate.UnitFrame.name:SetPoint("TOPLEFT", namePlate.UnitFrame, "TOPLEFT", 5, 2)
+		namePlate.UnitFrame.name:SetPoint("BOTTOMRIGHT", namePlate.UnitFrame, "TOPRIGHT", -5, -8)
 		namePlate.UnitFrame.name:SetIndentedWordWrap(false)
 		namePlate.UnitFrame.name:SetTextColor(1,1,1)
 		namePlate.UnitFrame.name:SetText("Name")
@@ -1260,29 +1262,32 @@ end
 --[[ Cvar settings ]]--
 
 local function defaultcvar()
-	if C.CVAR then
+	if C.Inset then
 		SetCVar("nameplateOtherTopInset", -1)
 		SetCVar("nameplateOtherBottomInset", -1)
 	else
 		SetCVar("nameplateOtherTopInset", .08)
 		SetCVar("nameplateOtherBottomInset", .1)
 	end
-	SetCVar("nameplateMaxDistance", C.MaxDistance)
-	-- fix fps drop
-	SetCVar("namePlateMinScale", 0.8)
+	SetCVar("nameplateLargeTopInset", .08)
+	SetCVar("nameplateLargeBottomInset", .1)
+
+	SetCVar("nameplateMaxDistance", C.MaxDistance)	 --default is 60
+	--fix fps drop
+	SetCVar("namePlateMinScale", 1)  --default is 0.8
 	SetCVar("namePlateMaxScale", 1)
+	--boss nameplate scale
+	SetCVar("nameplateLargerScale", 1) --default is 1.2
 
-	-- Dont let plates overlap each other
-	SetCVar("nameplateOverlapH",  1)
-	SetCVar("nameplateOverlapV",  1)
+	SetCVar("nameplateSelectedScale", C.SelectedScale)
 
-	-- Boss nameplate scale
-	SetCVar("nameplateLargerScale", 1.2)
-
-	-- Non-current target transparency
+	SetCVar("nameplateOverlapH",  0.3) --default is 0.8
+	SetCVar("nameplateOverlapV",  0.7) --default is 1.1
+	--非當前目標透明度
 	SetCVar("nameplateMinAlpha", C.MinAlpha)
 
-	-- Clickthrough settings
+	SetCVar("nameplateSelectedScale", C.SelectedScale)
+
 	C_NamePlate.SetNamePlateFriendlyClickThrough(C.FriendlyClickThrough)
 	C_NamePlate.SetNamePlateEnemyClickThrough(C.EnemyClickThrough)
 
@@ -1293,7 +1298,7 @@ local function defaultcvar()
 	SetCVar("nameplatePersonalHideDelaySeconds", 3)
 
 	-- Enemy plates
-	SetCVar("nameplateShowEnemyGuardians", 0)
+	SetCVar("nameplateShowEnemyGuardians", 1)
 	SetCVar("nameplateShowEnemyMinions", 1)
 	SetCVar("nameplateShowEnemyPets", 0)
 	SetCVar("nameplateShowEnemyTotems", 1)
