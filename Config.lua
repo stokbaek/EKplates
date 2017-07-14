@@ -32,7 +32,7 @@ G.fontflag = "OUTLINE"  -- "OUTLINE" or none
 
 --[[ Config ]]--
 
-C.CVAR = false  -- Let Nameplates go off screen
+C.Insert = false  -- Let Nameplates go off screen
 C.MaxDistance = 45  -- Max distance for nameplate show on
 C.MinAlpha = 0.8 -- Set fadeout for out range and non-target
 C.SelectedScale = 1 -- Scale select target nameplate
@@ -57,6 +57,7 @@ C.playerplate = false  -- Player self nameplate
 C.classresource_show = false  -- Resource
 C.classresource = "player" -- "player", "target"
 C.plateaura = false  -- Aura
+C.PlayerClickThrough = false -- Player resource click through
 
 --[[ Aura Icons on Plates ]]--
 
@@ -75,15 +76,9 @@ C.WhiteList = {
 	--BUFF
 	[209859] = true, -- Bolstering(mythic+)
 	[226510] = true, -- Sanguine Ichor(mythic+)
-
+	[236513] = true, -- Bonecage Armor (ToS)
 	-- DEBUFF
-	[146739] = true, -- Corruption
-	[980] = true, -- Agony
-	[63106] = true, -- Siphon Life
-	[27243] = true, -- Seed of Corruption
-}
-
-C.CCList = {
+	
 	-- CC
 	[25046]  = true, -- Arcane Torrent
 
