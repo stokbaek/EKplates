@@ -172,7 +172,9 @@ local function UpdateAuraIcon(button, unit, index, filter)
 
 	local color = DebuffTypeColor[debuffType] or DebuffTypeColor.none
 	button.overlay:SetVertexColor(color.r, color.g, color.b)
-
+	if not UnitDebuff(unit, index, "PLAYER") then
+		button.icon:SetDesaturated(true)
+	end
 	if count and count > 1 then
 		button.count:SetText(count)
 	else
@@ -198,7 +200,13 @@ local function UpdateAuraIcon(button, unit, index, filter)
 	button:Show()
 end
 
-local function AuraFilter(caster, spellid)
+local function AuraFilter(caster, spellid, botton)
+	if C.OTHERSTAUNT == True and C.Taunts[spellid] then
+		return true
+	end
+	if C.BUFF == True and C.BUFFList[spellid] then
+		return true
+	end
     if C.CC == True and C.CCList[spellid] then
         return true
     end
@@ -364,10 +372,10 @@ if C.classresource_show then
 	}
 
 	local cpoints_colors = { -- combat points
-		{1, 0, 0},  
+		{1, 0, 0},
 		{1, 1, 0},
 	}
-	
+
 	if(G.myClass == 'MONK') then
 		ClassPowerID = Enum.PowerType.Chi
 		ClassPowerType = "CHI"
@@ -485,7 +493,7 @@ if C.classresource_show then
 									self[i]:Hide()
 								end
 								self[i].tex:SetColorTexture(unpack(cpoints_colors[1]))
-							end  
+							end
 						else
 							for i = 1, 5 do
 								self[i]:Show()
@@ -692,7 +700,7 @@ end
 local function UpdateHealthColor(unitFrame)
 	local unit = unitFrame.displayedUnit
 	local r, g, b
-	
+
 	if ( not UnitIsConnected(unit) ) then
 		r, g, b = 0.7, 0.7, 0.7
 	else
@@ -1038,16 +1046,16 @@ local function OnNamePlateCreated(namePlate)
 		end
 		if C.classresource_show and C.classresource == "target" then
 			namePlate.UnitFrame.castBar:SetPoint("TOP", namePlate.UnitFrame.name, "BOTTOM", 0, -7)
-		else  
+		else
 			namePlate.UnitFrame.castBar:SetPoint("TOP", namePlate.UnitFrame.name, "BOTTOM", 0, -3)
-		end 
+		end
 
 		namePlate.UnitFrame.castBar:SetStatusBarTexture(G.iconcastbar)
 		namePlate.UnitFrame.castBar:SetStatusBarColor(0.5, 0.5, 0.5)
-		
+
 		namePlate.UnitFrame.castBar.border = CreateBDFrame(namePlate.UnitFrame.castBar, 0)
 		CreateThinSD(namePlate.UnitFrame.castBar.border, 1, 0, 0, 0, 1, -2)
-		
+
 		namePlate.UnitFrame.castBar.bg = namePlate.UnitFrame.castBar:CreateTexture(nil, 'BORDER')
 		namePlate.UnitFrame.castBar.bg:SetAllPoints(namePlate.UnitFrame.castBar)
 		namePlate.UnitFrame.castBar.bg:SetTexture(1/3, 1/3, 1/3, .5)
@@ -1072,7 +1080,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.castBar.BorderShield = namePlate.UnitFrame.castBar:CreateTexture(nil, "OVERLAY", 1)
 		namePlate.UnitFrame.castBar.BorderShield:SetAtlas("nameplates-InterruptShield")
 		namePlate.UnitFrame.castBar.BorderShield:SetSize(15, 15)
-		namePlate.UnitFrame.castBar.BorderShield:SetPoint("CENTER", namePlate.UnitFrame.castBar, "BOTTOMLEFT")  
+		namePlate.UnitFrame.castBar.BorderShield:SetPoint("CENTER", namePlate.UnitFrame.castBar, "BOTTOMLEFT")
 		namePlate.UnitFrame.castBar.BorderShield:SetDrawLayer("OVERLAY",2)
 
 
@@ -1101,7 +1109,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:SetTexture(G.raidicon)
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:SetAllPoints()
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:Hide()
-		
+
 		namePlate.UnitFrame.redarrow = namePlate.UnitFrame:CreateTexture(nil, 'OVERLAY')
 		namePlate.UnitFrame.redarrow:SetSize(50, 50)
 		if C.HideArrow then
@@ -1113,7 +1121,7 @@ local function OnNamePlateCreated(namePlate)
 			namePlate.UnitFrame.redarrow:SetTexture(G.redarrow1)
 		end
 		namePlate.UnitFrame.redarrow:Hide()
-		
+
 		namePlate.UnitFrame.icons = CreateFrame("Frame", nil, namePlate.UnitFrame)
 		namePlate.UnitFrame.icons:SetPoint("BOTTOM", namePlate.UnitFrame.healthperc, "TOP", 0, 0)
 		namePlate.UnitFrame.icons:SetWidth(140)
@@ -1266,21 +1274,21 @@ local function defaultcvar()
 		SetCVar("nameplateOtherTopInset", .08)
 		SetCVar("nameplateOtherBottomInset", .1)
 	end
-	SetCVar("nameplateLargeTopInset", .08) 
+	SetCVar("nameplateLargeTopInset", .08)
 	SetCVar("nameplateLargeBottomInset", .1)
-	
+
 	SetCVar("nameplateMaxDistance", C.MaxDistance)	 --default is 60
 	--fix fps drop
 	SetCVar("namePlateMinScale", 1)  --default is 0.8
-	SetCVar("namePlateMaxScale", 1) 
+	SetCVar("namePlateMaxScale", 1)
 	--boss nameplate scale
 	SetCVar("nameplateLargerScale", 1) --default is 1.2
 
-	SetCVar("nameplateSelectedScale", C.SelectedScale)	
+	SetCVar("nameplateSelectedScale", C.SelectedScale)
 
 	SetCVar("nameplateOverlapH",  0.3) --default is 0.8
 	SetCVar("nameplateOverlapV",  0.7) --default is 1.1
-	--非當前目標透明度
+
 	SetCVar("nameplateMinAlpha", C.MinAlpha)
 
 	SetCVar("nameplateSelectedScale", C.SelectedScale)
