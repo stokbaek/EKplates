@@ -174,6 +174,8 @@ local function UpdateAuraIcon(button, unit, index, filter)
 	button.overlay:SetVertexColor(color.r, color.g, color.b)
 	if not UnitDebuff(unit, index, "PLAYER") then
 		button.icon:SetDesaturated(true)
+	else
+		button.icon:SetDesaturated(false)
 	end
 	if count and count > 1 then
 		button.count:SetText(count)
