@@ -195,6 +195,7 @@ C.CCList = {
     [20066]     = true, -- Repentance
     [115078]    = true, -- Paralysis
     [207167]    = true, -- Blinding Sheet
+    [118699]	= true, -- Fear
 
     [339]       = true, -- Entangling Roots
     [102359]    = true, -- Mass Entanglement
