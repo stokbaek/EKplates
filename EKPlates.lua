@@ -1113,7 +1113,7 @@ local function OnNamePlateCreated(namePlate)
 		namePlate.UnitFrame.RaidTargetFrame.RaidTargetIcon:Hide()
 
 		namePlate.UnitFrame.redarrow = namePlate.UnitFrame:CreateTexture(nil, 'OVERLAY')
-		namePlate.UnitFrame.redarrow:SetSize(50, 50)
+		namePlate.UnitFrame.redarrow:SetSize(25, 25)
 		if C.HideArrow then
 			namePlate.UnitFrame.redarrow:SetAlpha(0)
 		end

@@ -8,7 +8,7 @@ local T, C, L, G = unpack(select(2, ...))
 
 --[[ Global ]]--
 
-C.numberstyle = true -- Infinity plates's number style
+C.numberstyle = false -- Infinity plates's number style
 
 --[[ Textures ]]--
 
@@ -26,8 +26,8 @@ G.myClass = select(2, UnitClass("player"))
 G.numberstylefont = "Interface\\AddOns\\EKplates\\media\\Infinity Gears.ttf"  -- Number style's number font
 G.numFont = "Interface\\AddOns\\EKplates\\media\\number.ttf" -- Number font
 G.norFont = STANDARD_TEXT_FONT  -- Name font(or use"GameFontHighlight:GetFont()")
-G.fontsize = 10  -- Name font size
-G.aurafontsize = 12  -- Aura font size
+G.fontsize = 12  -- Name font size
+G.aurafontsize = 10  -- Aura font size
 G.fontflag = "OUTLINE"  -- "OUTLINE" or none
 
 --[[ Config ]]--
@@ -61,8 +61,8 @@ C.PlayerClickThrough = false -- Player resource click through
 
 --[[ Aura Icons on Plates ]]--
 
-C.auranum = 5
-C.auraiconsize = 22
+C.auranum = 10
+C.auraiconsize = 17
 C.myfiltertype = "whitelist" -- Show aura cast by player
 C.otherfiltertype = "none"  -- Show aura cast by other
 C.BUFF = True -- Show important buffs on mobs.
@@ -160,9 +160,9 @@ C.WhiteList = {
     [205179]    = true, -- Phantom Singularity
 
     -- Warrior:
-    [27579]     = true, -- Demoralizing Shout
+    [1160]    	= true, -- Demoralizing Shout
     [13532]     = true, -- Thunder Clap
-    [238149]    = true, -- Neltharion's Thunder
+    [243016]    = true, -- Neltharion's Thunder
     [772]       = true, -- Rend
     [215537]    = true, -- Trauma
     [208086]    = true, -- Colossus Smash
@@ -195,7 +195,7 @@ C.CCList = {
     [20066]     = true, -- Repentance
     [115078]    = true, -- Paralysis
     [207167]    = true, -- Blinding Sheet
-    [118699]	= true, -- Fear
+    [118699]    = true, -- Fear
 
     [339]       = true, -- Entangling Roots
     [102359]    = true, -- Mass Entanglement
