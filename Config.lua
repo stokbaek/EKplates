@@ -1,4 +1,4 @@
-local EKPlates, ns = ...
+﻿local EKPlates, ns = ...
 ns[1] = {}                                                                      -- C, config
 ns[2] = {}                                                                      -- G, globals (Optionnal)
 
@@ -30,7 +30,7 @@ G.fontflag = "OUTLINE"                                                          
 
 -- [[ Config ]] --
 
-C.Inset = Textures                                                              -- Let Nameplates don't go off screen
+C.Inset = true                                                              -- Let Nameplates don't go off screen
 C.MaxDistance = 45                                                              -- max distance for nameplate show on
 C.SelectedScale = 1                                                             -- scale select target nameplate
 C.MinAlpha = 0.8                                                                -- set fadeout for out of range and non-target
@@ -39,9 +39,9 @@ C.FriendlyClickThrough = true                                                   
 C.EnemyClickThrough = false                                                     -- enemy nameplate click through
 
 C.name_mod = true                                                               -- show only name on friendy player nameplates
-C.friendlyCR = Textures                                                         -- friendly class color
+C.friendlyCR = false                                                         -- friendly class color
 
-C.enemyCR = Textures                                                            -- enemy class color
+C.enemyCR = false                                                            -- enemy class color
 C.threatcolor = true                                                            -- change name color by threat
 
 C.cbshield = false                                                              -- show castbar un-interrupt shield icon
@@ -67,9 +67,9 @@ C.auranum = 5                                                                   
 C.auraiconsize = 22                                                             -- aura icon size
 C.myfiltertype = "blacklist"                                                    -- show aura cast by player
 C.otherfiltertype = ""                                                          -- show aura cast by other
-C.OTHERSTAUNT = True                                                            -- Shows all taunts on nameplates
-C.BUFF = True                                                                   -- Show important buffs on mobs.
-C.CC = True                                                                     -- Show CC debuffs on targets
+C.OTHERSTAUNT = true                                                            -- Shows all taunts on nameplates
+C.BUFF = true                                                                   -- Show important buffs on mobs.
+C.CC = true                                                                     -- Show CC debuffs on targets
 
                                                                                 --[[
                                                                                     whitelist: show only list
@@ -136,13 +136,17 @@ C.BlackList = {
     [166646]    = true,                                                         -- Windwalking
     [227723]    = true,                                                         -- Mana Divining Stone
     [198590]    = true,                                                         -- Drain soul
-}
+}   
 
 --[[ Custom colored plates ]]--
 
 C.Customcoloredplates = {
     [1] = {
         name = "Fel Explosives",
+        color = {r = 0, g = 1, b = 1},
+    },
+    [2] = {
+        name = "Reanimated Templar",
         color = {r = 0, g = 1, b = 1},
     },
 }
