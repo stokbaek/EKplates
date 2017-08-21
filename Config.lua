@@ -67,6 +67,7 @@ C.auranum = 5                                                                   
 C.auraiconsize = 22                                                             -- aura icon size
 C.myfiltertype = "blacklist"                                                    -- show aura cast by player
 C.otherfiltertype = ""                                                          -- show aura cast by other
+C.OTHERSTAUNT = True                                                            -- Shows all taunts on nameplates
 
                                                                                 --[[
                                                                                     whitelist: show only list
