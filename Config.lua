@@ -68,6 +68,8 @@ C.auraiconsize = 22                                                             
 C.myfiltertype = "blacklist"                                                    -- show aura cast by player
 C.otherfiltertype = ""                                                          -- show aura cast by other
 C.OTHERSTAUNT = True                                                            -- Shows all taunts on nameplates
+C.BUFF = True                                                                   -- Show important buffs on mobs.
+C.CC = True                                                                     -- Show CC debuffs on targets
 
                                                                                 --[[
                                                                                     whitelist: show only list
