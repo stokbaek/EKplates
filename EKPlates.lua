@@ -703,16 +703,37 @@ local function UpdatePower(unitFrame)
     
 end
 
+
 local function IsOnThreatList(unit)
     local _, threatStatus = UnitDetailedThreatSituation("player", unit)
-    if threatStatus == 3 then
-        return .9, .1, .4
-    elseif threatStatus == 2 then
-        return .9, .1, .9
-    elseif threatStatus == 1 then
-        return .4, .1, .9
-    elseif threatStatus == 0 then
-        return .1, .7, .9
+    local c = { red = {.9, .1, .4}, pink = {.9, .1, .9}, purple = {.4, .1, .9}, yellow = {.9, .8, .0}, green = {.4, .9, .1} }
+    if GetSpecializationRole(GetSpecialization()) == "TANK" then
+        if threatStatus == 3 then
+            return c.green[1],c.green[2],c.green[3]
+        elseif threatStatus == 2 then
+            return c.yellow[1],c.yellow[2],c.yellow[3]
+        elseif threatStatus == 1 then
+            return c.purple[1],c.purple[2],c.purple[3]         
+        elseif threatStatus == 0 then
+            for tank = 1, #_G.tanks do
+                local isTanking = UnitDetailedThreatSituation(_G.tanks[tank], unit)
+                if  isTanking then
+                    return c.pink[1],c.pink[2],c.pink[3]
+                else
+                    return c.red[1],c.red[2],c.red[3]
+                end
+            end
+        end
+    else
+        if threatStatus == 3 then
+            return c.red[1],c.red[2],c.red[3]
+        elseif threatStatus == 2 then
+            return c.yellow[1],c.yellow[2],c.yellow[3]
+        elseif threatStatus == 1 then
+            return c.purple[1],c.purple[2],c.purple[3]
+        elseif threatStatus == 0 then
+            return c.green[1],c.green[2],c.green[3]
+        end
     end
 end
 
@@ -1336,7 +1357,7 @@ local function defaultcvar()
     SetCVar("namePlateMaxScale", 0.8)
     SetCVar("nameplateLargerScale", 1)
     SetCVar("nameplateSelectedScale", C.SelectedScale)
-    SetCVar("nameplateOverlapH",  0.3)
+    SetCVar("nameplateOverlapH",  1)
     SetCVar("nameplateOverlapV",  0.7)
     SetCVar("nameplateMinAlpha", C.MinAlpha)
     SetCVar("nameplateOccludedAlphaMult", 0.2)  
@@ -1389,6 +1410,27 @@ local function NamePlates_OnEvent(self, event, ...)
         defaultcvar()
     end
 end
+
+
+local f = CreateFrame("Frame", nil, UIParent)
+f:RegisterEvent("GROUP_ROSTER_UPDATE")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self, event)
+    if UnitInParty("player") then
+        grouptype = "party"
+    elseif UnitInRaid("player") then
+        grouptype = "raid"
+    else
+        return
+    end
+    groupsize = GetNumGroupMembers()
+    _G.tanks = {}
+    for i=groupsize,1,-1 do
+        if UnitGroupRolesAssigned(grouptype..i) == "TANK" then
+            _G.tanks[#_G.tanks+1] = grouptype..i
+        end
+    end
+end)
 
 local NamePlatesFrame = CreateFrame("Frame", "NamePlatesFrame", UIParent)
 NamePlatesFrame:SetScript("OnEvent", NamePlates_OnEvent)
