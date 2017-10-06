@@ -6,3 +6,4 @@
 * Option to show castbar instead of cast icon when using numberstyle.
 * CC debuffs are in their own section and can be turned on/off, This makes it possible to use whitelist for your owndebuffs while still showing CC from other players.
 * Shows taunt effect on nameplates and option to show others taunt too.
+* Dynamic nameplate colours as tank (Also shows if other tank in group/raid is tanking mobs)
